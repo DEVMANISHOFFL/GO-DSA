@@ -2,24 +2,25 @@ package main
 
 import "fmt"
 
-func twoSum(arr []int, target int) [][]int {
-	foundingPairs := [][]int{}
-	seen := make(map[int]int)
+func reverseArray(arr []int) []int {
+	temp := []int{}
 
-	for i, num := range arr {
-
-		toFind := target - num
-		if j, found := seen[toFind]; found {
-			fmt.Println(j)
-			foundingPairs = append(foundingPairs, []int{i, j})
-		}
-		seen[num] = i
-		// fmt.Println(seen)
+	for i := len(arr) - 1; i >= 0; i-- {
+		temp = append(temp, arr[i])
 	}
-	return foundingPairs
+	return temp
+}
+
+func reverseArrayModifies(arr []int) []int {
+	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
+		arr[i], arr[j] = arr[j], arr[i]
+	}
+	return arr
 }
 
 func main() {
-	arr := []int{1, 3, 5, 7, 2, 4, 6, 8}
-	fmt.Println(twoSum(arr, 10))
+	arr := []int{1, 2, 3, 4, 5, 6}
+	arr2 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
+	fmt.Println(reverseArray(arr))
+	fmt.Println(reverseArrayModifies(arr2))
 }
