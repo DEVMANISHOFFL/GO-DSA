@@ -15,7 +15,7 @@ func slidingWindow(arr []int, m int) int {
 
 	minDiff := arr[m-1] - arr[0]
 
-	for i := 1; i <= m-n; i++ {
+	for i := 1; i <= n-m; i++ {
 		diff := arr[i+m-1] - arr[i]
 		if diff < minDiff {
 			minDiff = diff
