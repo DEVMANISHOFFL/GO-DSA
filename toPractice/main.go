@@ -2,25 +2,30 @@ package main
 
 import "fmt"
 
-func reverseArray(arr []int) []int {
-	temp := []int{}
+func maxSubArraySum(arr []int) int {
 
-	for i := len(arr) - 1; i >= 0; i-- {
-		temp = append(temp, arr[i])
+	if len(arr) == 0 {
+		return 0
 	}
-	return temp
+
+	currSum, maxSum := arr[0], arr[0]
+	for i := 1; i < len(arr); i++ {
+		currSum = max(arr[i], currSum+arr[i])
+		maxSum = max(maxSum, currSum)
+	}
+	return maxSum
+
 }
 
-func reverseArrayModifies(arr []int) []int {
-	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
-		arr[i], arr[j] = arr[j], arr[i]
+func max(a, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
 	}
-	return arr
 }
 
 func main() {
-	arr := []int{1, 2, 3, 4, 5, 6}
-	arr2 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
-	fmt.Println(reverseArray(arr))
-	fmt.Println(reverseArrayModifies(arr2))
+	arr := []int{2, 4, 6, 8, 0, 1, 2, 3, -4, 5, 6, -7, -8, 9}
+	fmt.Println(maxSubArraySum((arr)))
 }
