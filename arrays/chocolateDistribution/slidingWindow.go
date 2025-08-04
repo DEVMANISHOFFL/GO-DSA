@@ -9,19 +9,18 @@ func slidingWindow(arr []int, m int) int {
 	sort.Ints(arr)
 	n := len(arr)
 
-	if m == 0 || m > n {
+	if n == 0 || n < m {
 		return 0
 	}
 
 	minDiff := arr[m-1] - arr[0]
 
-	for i := 1; i <= m-n; i++ {
+	for i := 1; i <= n-m; i++ {
 		diff := arr[i+m-1] - arr[i]
 		if diff < minDiff {
 			minDiff = diff
 		}
 	}
-
 	return minDiff
 }
 
