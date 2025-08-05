@@ -29,7 +29,7 @@ func withNoExtraSpaceCheck(nums []int) bool {
 func containsDuplicates(nums []int) bool {
 	seen := make(map[int]bool)
 
-	for num := range nums {
+	for _, num := range nums {
 		if seen[num] {
 			return true
 		}

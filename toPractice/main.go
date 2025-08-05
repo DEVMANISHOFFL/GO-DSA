@@ -1,33 +1,54 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-)
+import "fmt"
 
-func distribution(arr []int, m int) (int, []int) {
-	sort.Ints(arr)
+func permutation(arr []int) []int {
+	piv := -1
 	n := len(arr)
 
-	if n == 0 || n < m {
-		return 0, []int{}
-	}
-
-	assumeMinDiff := arr[m-1] - arr[0]
-	st, end := 0, m-1
-
-	for i := 0; i <= n-m; i++ {
-		diff := arr[i+m-1] - arr[i]
-		if diff < assumeMinDiff {
-			assumeMinDiff = diff
-			st = i
-			end = i + m - 1
+	//finding the pivot
+	for i := n - 2; i >= 0; i-- {
+		if arr[i] < arr[i+1] {
+			piv = i
+			break
 		}
 	}
-	return assumeMinDiff, arr[st : end+1]
+	//if pivot not found -----> just reverse the array and we get next permutation here only
+	if piv == -1 {
+		for i, j := 0, n-1; i < j; i, j = i+1, j-1 {
+			arr[i], arr[j] = arr[j], arr[i]
+		}
+		return arr
+	}
+
+	//2nd step---------> next larger element than pivot
+
+	for i := n - 1; i > piv; i-- {
+		if arr[i] > arr[piv] {
+			arr[i], arr[piv] = arr[piv], arr[i]
+			break
+		}
+	}
+
+	//3rd step ---------> reverse the array from piv + 1 to n-1
+
+	for i, j := piv+1, n-1; i < j; i, j = i+1, j-1 {
+		arr[i], arr[j] = arr[j], arr[i]
+	}
+
+	return arr
 }
 
+// func reverse(arr []int, start, end int) {
+// 	for start < end {
+// 		arr[start], arr[end] = arr[end], arr[start]
+// 		start++
+// 		end--
+// 	}
+// }
+
 func main() {
-	arr := []int{12, 4, 7, 9, 2, 23, 25, 41, 30, 40, 28, 42, 30, 44, 48, 43, 50}
-	fmt.Println(distribution(arr, 9))
+	arr := []int{3, 2, 1}
+	fmt.Println(permutation(arr))
+
 }
