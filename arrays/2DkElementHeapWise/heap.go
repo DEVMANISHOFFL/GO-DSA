@@ -21,7 +21,7 @@ func (h *MinHeap) Pop() any {
 	return val
 }
 
-func kLargest(grid [][]int, k int) int {
+func findKthLargest(grid [][]int, k int) int {
 	h := &MinHeap{}
 	heap.Init(h)
 
@@ -42,6 +42,6 @@ func main() {
 		{1, 6},
 	}
 
-	fmt.Println(kLargest(grid, 3))
+	fmt.Println(findKthLargest(grid, 3))
 
 }
