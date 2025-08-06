@@ -1,24 +1,21 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func missing(grid [][]int) []int {
-
-	seen := make(map[int]bool)
+func missingAndDuplicate(grid [][]int) []int {
 	n := len(grid)
-	var repeated, missing int
+	seen := make(map[int]bool)
 	actualSum := 0
+	var repeated, missing int
 
 	for i := range grid {
 		for j := range grid {
-			num := grid[i][j] // listing all the numbers
-			actualSum = actualSum + num
-			if seen[num] {
-				repeated = num
+			nums := grid[i][j]
+			actualSum += nums
+			if seen[nums] {
+				repeated = nums
 			}
-			seen[num] = true
+			seen[nums] = true
 		}
 	}
 	total := n * n
@@ -30,6 +27,6 @@ func missing(grid [][]int) []int {
 
 func main() {
 	arr := [][]int{{9, 2, 3}, {4, 5, 6}, {7, 7, 1}}
-	fmt.Println(missing(arr))
+	fmt.Println(missingAndDuplicate(arr))
 
 }
