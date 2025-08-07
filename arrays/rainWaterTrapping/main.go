@@ -10,14 +10,15 @@ func max(a, b int) int {
 	}
 }
 
-func rainWaterHarvesting(hi []int) int {
+func rain(hi []int) int {
 	n := len(hi)
 	l, r, lmax, rmax, ans := 0, n-1, 0, 0, 0
 
 	for l < r {
 		lmax = max(lmax, hi[l])
 		rmax = max(rmax, hi[r])
-		if lmax > rmax {
+
+		if rmax < lmax {
 			ans += rmax - hi[r]
 			r--
 		} else {
@@ -30,5 +31,5 @@ func rainWaterHarvesting(hi []int) int {
 
 func main() {
 	height := []int{4, 2, 0, 3, 2, 5}
-	fmt.Println(rainWaterHarvesting(height))
+	fmt.Println(rain(height))
 }
