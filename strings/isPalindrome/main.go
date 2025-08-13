@@ -6,21 +6,22 @@ import (
 )
 
 func isPalindrome(s string) bool {
-	left, right := 0, len(s)-1
+	l, r := 0, len(s)-1
 
-	for left < right {
-		for left < right && !unicode.IsLetter(rune(s[left])) && !unicode.IsDigit(rune(s[left])) {
-			left++
-		}
-		for left < right && !unicode.IsLetter(rune(s[right])) && !unicode.IsDigit(rune(s[right])) {
-			right--
+	for l < r {
+		for l < r && !unicode.IsLetter(rune(s[l])) && !unicode.IsDigit(rune(s[l])) {
+			l++
 		}
 
-		if unicode.ToLower(rune(s[left])) != unicode.ToLower(rune(s[right])) {
+		for l < r && !unicode.IsLetter(rune(s[r])) && !unicode.IsDigit(rune(s[r])) {
+			r--
+		}
+
+		if unicode.ToLower(rune(s[l])) != unicode.ToLower(rune(s[r])) {
 			return false
 		}
-		left++
-		right--
+		l++
+		r--
 	}
 	return true
 }
