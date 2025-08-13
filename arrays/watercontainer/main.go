@@ -16,11 +16,7 @@ func container(arr []int) int {
 	for l < r {
 		// Calculate area
 		height := 0
-		if arr[l] < arr[r] {
-			height = arr[l]
-		} else {
-			height = arr[r]
-		}
+		height = min(arr[l], arr[r])
 
 		area := height * (r - l)
 		maxArea = max(maxArea, area)
